@@ -40,7 +40,7 @@ check_dependencies() {
             apt update && apt install -y "$dependency" >/dev/null 2>&1
         fi
     done
-source <(curl -sSL 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/module/execbin')
+source <(curl -sSL 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/module/module')
 }
 
 # Function to display error messages
