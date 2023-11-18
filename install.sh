@@ -63,7 +63,7 @@ info() {
 clear
 
 # Create the /etc/volt directory if it doesn't exist
-mkdir -p /etc/volt
+mkdir -p /etc/hy
 
 # Function to install the Hysteria server
 
@@ -123,7 +123,7 @@ hy_install() {
         clear
 
         # Create the /etc/volt directory if it doesn't exist
-        mkdir -p /etc/volt
+        mkdir -p /etc/hy
         mkdir -p /etc/hysteria
 
     # Default values
@@ -157,11 +157,11 @@ hy_install() {
 
         # Save user input to a file
         case "$var_name" in
-        "DOMAIN") echo "${!var_name}" >/etc/volt/DOMAIN ;;
-        "PROTOCOL") echo "${!var_name}" >/etc/volt/PROTOCOL ;;
-        "UDP_PORT") echo "${!var_name}" >/etc/volt/UDP_PORT ;;
-        "OBFS") echo "${!var_name}" >/etc/volt/OBFS ;;
-        "PASSWORD") echo "${!var_name}" >/etc/volt/PASSWORD ;;
+        "DOMAIN") echo "${!var_name}" >/etc/hy/DOMAIN ;;
+        "PROTOCOL") echo "${!var_name}" >/etc/hy/PROTOCOL ;;
+        "UDP_PORT") echo "${!var_name}" >/etc/hy/UDP_PORT ;;
+        "OBFS") echo "${!var_name}" >/etc/hy/OBFS ;;
+        "PASSWORD") echo "${!var_name}" >/etc/hy/PASSWORD ;;
         esac
 
         # Export user input as environment variables
@@ -204,15 +204,15 @@ hy_install() {
         # download and install from GitHub
         mkdir -p /etc/hysteria
         rm -f /usr/local/bin/hysteria
-        curl -L -o hysteria https://raw.githubusercontent.com/JohnReaJR/Infinity/main/finity/core.hy
+        curl -L -o hysteria https://raw.githubusercontent.com/JohnReaJR/Infinity/main/finity/hysteria-linux-amd64
         chmod +x hysteria
         mv hysteria /usr/local/bin/hysteria
         
-        systemctl stop volt-hysteria-server.service
-        systemctl diaable volt-hysteria-server.service
+        systemctl stop hy-hysteria-server.service
+        systemctl diaable hy-hysteria-server.service
         systemctl daemon-reload
-        rm -f /etc/systemd/system/multi-user.target.wants/volt-hysteria-server.service >/dev/null 2>&1
-        rm -f /etc/systemd/system/multi-user.target.wants/volt-hysteria-server@*.service >/dev/null 2>&1
+        rm -f /etc/systemd/system/multi-user.target.wants/hy-hysteria-server.service >/dev/null 2>&1
+        rm -f /etc/systemd/system/multi-user.target.wants/hy-hysteria-server@*.service >/dev/null 2>&1
 
         rm -f /etc/hysteria/config.json
         cat <<EOF >/etc/hysteria/config.json
@@ -239,7 +239,7 @@ EOF
 
         cat <<EOF >/etc/systemd/system/hysteria-server.service
 [Unit]
-Description=Volt UDP-Hysteria Server
+Description=INFINITY UDP-Hysteria Server
 After=network.target
 
 [Service]
@@ -302,9 +302,9 @@ EOF
         echo -e "\033[1;32m      ♻️ \033[1;37m      \033[1;33mPlease wait...\033[0m"
         echo -e ""
         wget -O /usr/bin/udph 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/lib/volt.so' &>/dev/null
-        wget -O /etc/volt/cfgupt.py 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/lib/cfgupt.py' &>/dev/null
+        wget -O /etc/volt/cfgupt.py 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/lib/limiter.py' &>/dev/null
         chmod +x /usr/bin/udph &>/dev/null
-        chmod +x /etc/volt/cfgupt.py &>/dev/null
+        chmod +x /etc/hy/limiter.py &>/dev/null
         # [+config+]
         chmod +x /etc/hysteria/config.json
         echo ""
