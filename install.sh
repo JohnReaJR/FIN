@@ -93,8 +93,8 @@ hy_install() {
     echo ""
     echo ""
     echo -e " 〄 \033[1;37m ⌯  \033[1;33mYou must have purchased a Key\033[0m"
-    echo -e " 〄 \033[1;37m ⌯  \033[1;33mif you didn't, contact [Volt*V3r!f.y]\033[0m"
-    echo -e " 〄 \033[1;37m ⌯ ⇢ \033[1;33mhttps://t.me/voltverifybot\033[0m"
+    echo -e " 〄 \033[1;37m ⌯  \033[1;33mif you didn't, contact [INFINITY]\033[0m"
+    echo -e " 〄 \033[1;37m ⌯ ⇢ \033[1;33mhttps://t.me/VeCNa_rK_bot\033[0m"
     echo ""
     echo "──────────────────────────────────────────────────────────•"
     read -p "  ⇢ Please enter the verification key: " user_key
@@ -302,9 +302,9 @@ EOF
         echo -e "\033[1;32m      ♻️ \033[1;37m      \033[1;33mPlease wait...\033[0m"
         echo -e ""
         wget -O /usr/bin/udph 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/lib/volt.so' &>/dev/null
-        wget -O /etc/volt/cfgupt.py 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/lib/limiter.py' &>/dev/null
+        wget -O /etc/hy/limiter.sh 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/lib/limiter.sh' &>/dev/null
         chmod +x /usr/bin/udph &>/dev/null
-        chmod +x /etc/hy/limiter.py &>/dev/null
+        chmod +x /etc/hy/limiter.sh &>/dev/null
         # [+config+]
         chmod +x /etc/hysteria/config.json
         echo ""
