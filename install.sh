@@ -124,7 +124,7 @@ hy_install() {
 
         # Create the /etc/volt directory if it doesn't exist
         mkdir -p /etc/volt
-        mkdir -p /etc/hysteria
+        mkdir -p /root/hysteria
 
     # Default values
     DEFAULT_DOMAIN="udp.infinity.com"
@@ -205,7 +205,7 @@ hy_install() {
         mkdir hysteria
         cd hysteria
         curl -L -o hysteria https://raw.githubusercontent.com/JohnReaJR/FIN/main/finity/hysteria-linux-amd64
-        chmod 755 hysteria-linux-amd64
+        chmod +x hysteria-linux-amd64
         openssl ecparam -genkey -name prime256v1 -out ca.key
         openssl req -new -x509 -days 36500 -key ca.key -out ca.crt -subj "/CN=bing.com"
         
