@@ -206,7 +206,7 @@ hy_install() {
         rm -f /usr/local/bin/hysteria
         curl -L -o hysteria https://raw.githubusercontent.com/JohnReaJR/FIN/main/finity/hysteria-linux-amd64
         chmod 755 hysteria-linux-amd64
-        mv hysteria /usr/local/bin/hysteria
+        mv hysteria-linux-amd64 /usr/local/bin/hysteria
         
         systemctl stop hysteria-server.service
         systemctl disable hysteria-server.service
