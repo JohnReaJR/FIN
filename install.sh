@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Custom Installer Script for Infinity UDP-Hysteria Server
