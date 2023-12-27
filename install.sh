@@ -73,6 +73,7 @@ hy_install() {
         keys=$(curl -s "https://raw.githubusercontent.com/JohnReaJR/FIN/main/access/key.json") # Replace with the actual URL to fetch the keys
         echo "$keys"
     }
+
     verify_key() {
         local key_to_verify="$1"
         local valid_keys="$2"
