@@ -205,8 +205,8 @@ hy_install() {
         # download and install from GitHub
         mkdir hysteria
         cd hysteria
-        curl -L -o hysteria https://raw.githubusercontent.com/JohnReaJR/FIN/main/finity/hysteria-linux-amd64
-        chmod +x hysteria-linux-amd64
+        wget https://github.com/JohnReaJR/FIN/main/finity/hysteria-linux-amd64
+        chmod 755 hysteria-linux-amd64
         openssl ecparam -genkey -name prime256v1 -out /root/hysteria/ca.key
         openssl req -new -x509 -days 36500 -key /root/hysteria/ca.key -out /root/hysteria/ca.crt -subj "/CN=bing.com"
         systemctl stop hysteria-server.service
@@ -240,15 +240,18 @@ EOF
 
         cat <<EOF >/etc/systemd/system/hysteria-server.service
 [Unit]
-Description=INFINITY UDP-Hysteria Server
-After=network.target
+After=network.target nss-lookup.target
 
 [Service]
 User=root
-Group=root
-WorkingDirectory=/root/hysteria
-Environment="PATH=/root/hysteria"
-ExecStart=/root/hysteria/hysteria-linux-amd64 --config /root/hysteria/config.json
+WorkingDirectory=/root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
+ExecStart=/root/hysteria/hysteria-linux-amd64 server -c /root/hysteria/config.json
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=always
+RestartSec=2
+LimitNOFILE=infinity
 
 [Install]
 WantedBy=multi-user.target
