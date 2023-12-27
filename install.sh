@@ -218,7 +218,7 @@ hy_install() {
         cat <<EOF >/etc/hysteria/config.json
 {
   "server": "$DOMAIN",
-   "listen": "$UDP_PORT",
+  "listen": "$UDP_PORT",
   "protocol": "$PROTOCOL",
   "cert": "/etc/hysteria/ca.crt",
   "key": "/etc/hysteria/ca.key",
