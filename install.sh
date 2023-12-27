@@ -208,11 +208,6 @@ hy_install() {
         chmod +x hysteria-linux-amd64
         openssl ecparam -genkey -name prime256v1 -out /root/hysteria/ca.key
         openssl req -new -x509 -days 36500 -key /root/hysteria/ca.key -out /root/hysteria/ca.crt -subj "/CN=bing.com"
-        systemctl stop hysteria-server.service
-        systemctl disable hysteria-server.service
-        systemctl daemon-reload
-        rm -f /etc/systemd/system/multi-user.target.wants/hysteria-server.service >/dev/null 2>&1
-        rm -f /etc/systemd/system/multi-user.target.wants/hysteria-server@*.service >/dev/null 2>&1
 
         rm -f /root/hysteria/config.json
         cat <<EOF >/root/hysteria/config.json
