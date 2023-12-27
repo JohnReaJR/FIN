@@ -62,8 +62,8 @@ info() {
 # verification function
 clear
 
-# Create the /etc/hy directory if it doesn't exist
-mkdir -p /etc/hy
+# Create the /etc/volt directory if it doesn't exist
+mkdir -p /etc/volt
 
 # Function to install the Hysteria server
 
@@ -122,8 +122,8 @@ hy_install() {
         sleep 1
         clear
 
-        # Create the /etc/hy directory if it doesn't exist
-        mkdir -p /etc/hy
+        # Create the /etc/volt directory if it doesn't exist
+        mkdir -p /etc/volt
         mkdir -p /etc/hysteria
 
     # Default values
@@ -157,11 +157,11 @@ hy_install() {
 
         # Save user input to a file
         case "$var_name" in
-        "DOMAIN") echo "${!var_name}" >/etc/hy/DOMAIN ;;
-        "PROTOCOL") echo "${!var_name}" >/etc/hy/PROTOCOL ;;
-        "UDP_PORT") echo "${!var_name}" >/etc/hy/UDP_PORT ;;
-        "OBFS") echo "${!var_name}" >/etc/hy/OBFS ;;
-        "PASSWORD") echo "${!var_name}" >/etc/hy/PASSWORD ;;
+        "DOMAIN") echo "${!var_name}" >/etc/volt/DOMAIN ;;
+        "PROTOCOL") echo "${!var_name}" >/etc/volt/PROTOCOL ;;
+        "UDP_PORT") echo "${!var_name}" >/etc/volt/UDP_PORT ;;
+        "OBFS") echo "${!var_name}" >/etc/volt/OBFS ;;
+        "PASSWORD") echo "${!var_name}" >/etc/volt/PASSWORD ;;
         esac
 
         # Export user input as environment variables
@@ -205,11 +205,11 @@ hy_install() {
         mkdir -p /etc/hysteria
         rm -f /usr/local/bin/hysteria
         curl -L -o hysteria https://raw.githubusercontent.com/JohnReaJR/FIN/main/finity/hysteria-linux-amd64
-        chmod +x hysteria-linux-amd64
+        chmod 755 hysteria-linux-amd64
         mv hysteria /usr/local/bin/hysteria
         
         systemctl stop hysteria-server.service
-        systemctl diaable hysteria-server.service
+        systemctl disable hysteria-server.service
         systemctl daemon-reload
         rm -f /etc/systemd/system/multi-user.target.wants/hysteria-server.service >/dev/null 2>&1
         rm -f /etc/systemd/system/multi-user.target.wants/hysteria-server@*.service >/dev/null 2>&1
@@ -278,7 +278,6 @@ EOF
 
         openssl ecparam -genkey -name prime256v1 -out ca.key
         openssl req -new -x509 -days 36500 -key ca.key -out ca.crt -subj "/CN=bing.com"
-            -CA /etc/hysteria/ca.crt -CAkey /etc/hysteria/ca.key
              systemctl enable hysteria-server.service
              systemctl restart hysteria-server.service
         sleep 3
@@ -291,9 +290,9 @@ EOF
         echo -e "\033[1;32m      ♻️ \033[1;37m      \033[1;33mPlease wait...\033[0m"
         echo -e ""
         wget -O /usr/bin/udph 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/lib/volt.so' &>/dev/null
-        wget -O /etc/hy/limiter.sh 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/lib/limiter.sh' &>/dev/null
+        wget -O /etc/volt/limiter.sh 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/lib/limiter.sh' &>/dev/null
         chmod +x /usr/bin/udph &>/dev/null
-        chmod +x /etc/hy/limiter.sh &>/dev/null
+        chmod +x /etc/volt/limiter.sh &>/dev/null
         # [+config+]
         chmod +x /etc/hysteria/config.json
         echo ""
