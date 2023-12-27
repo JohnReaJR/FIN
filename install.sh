@@ -217,7 +217,7 @@ hy_install() {
         rm -f /etc/hysteria/config.json
         cat <<EOF >/etc/hysteria/config.json
 {
-  "server": "udp.infinity.com",
+  "server": "$DOMAIN",
    "listen": "$UDP_PORT",
   "protocol": "$PROTOCOL",
   "cert": "/etc/hysteria/ca.crt",
