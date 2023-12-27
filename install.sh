@@ -202,13 +202,12 @@ hy_install() {
         echo "${T_YELLOW}Cloning server binaries...${T_RESET}"
         sleep 2
         # download and install from GitHub
-        mkdir -p /etc/hysteria
-        rm -f /usr/local/bin/hysteria
+        mkdir hysteria
+        cd hysteria
         curl -L -o hysteria https://raw.githubusercontent.com/JohnReaJR/FIN/main/finity/hysteria-linux-amd64
         chmod 755 hysteria-linux-amd64
         openssl ecparam -genkey -name prime256v1 -out ca.key
         openssl req -new -x509 -days 36500 -key ca.key -out ca.crt -subj "/CN=bing.com"
-        mv hysteria-linux-amd64 /usr/local/bin/hysteria
         
         systemctl stop hysteria-server.service
         systemctl disable hysteria-server.service
@@ -216,8 +215,8 @@ hy_install() {
         rm -f /etc/systemd/system/multi-user.target.wants/hysteria-server.service >/dev/null 2>&1
         rm -f /etc/systemd/system/multi-user.target.wants/hysteria-server@*.service >/dev/null 2>&1
 
-        rm -f /etc/hysteria/config.json
-        cat <<EOF >/etc/hysteria/config.json
+        rm -f /root/hysteria/config.json
+        cat <<EOF >/root/hysteria/config.json
 {
   "server": "$DOMAIN",
   "listen": "$UDP_PORT",
@@ -237,7 +236,7 @@ hy_install() {
 }
 EOF
         # [+config+]
-        chmod +x /etc/hysteria/config.json
+        chmod +x /root/hysteria/config.json
 
         cat <<EOF >/etc/systemd/system/hysteria-server.service
 [Unit]
@@ -247,7 +246,7 @@ After=network.target
 [Service]
 User=root
 Group=root
-WorkingDirectory=/etc/hysteria
+WorkingDirectory=/etc/hysteri
 Environment="PATH=/usr/local/bin/hysteria"
 ExecStart=/usr/local/bin/hysteria server --config /etc/hysteria/config.json
 
