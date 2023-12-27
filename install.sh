@@ -204,7 +204,7 @@ hy_install() {
         # download and install from GitHub
         mkdir -p /etc/hysteria
         rm -f /usr/local/bin/hysteria
-        curl -L -o hysteria https://raw.githubusercontent.com/JohnReaJR/Infinity/main/FIN/hysteria-linux-amd64
+        curl -L -o hysteria https://raw.githubusercontent.com/JohnReaJR/FIN/main/finity/hysteria-linux-amd64
         chmod +x hysteria-linux-amd64
         mv hysteria /usr/local/bin/hysteria
         
