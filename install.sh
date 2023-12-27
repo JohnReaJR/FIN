@@ -221,8 +221,8 @@ hy_install() {
   "server": "$DOMAIN",
   "listen": "$UDP_PORT",
   "protocol": "$PROTOCOL",
-  "cert": "/etc/hysteria/ca.crt",
-  "key": "/etc/hysteria/ca.key",
+  "cert": "/root/hysteria/ca.crt",
+  "key": "/root/hysteria/ca.key",
   "up": "100 Mbps",
   "up_mbps": 100,
   "down": "100 Mbps",
@@ -246,9 +246,9 @@ After=network.target
 [Service]
 User=root
 Group=root
-WorkingDirectory=/etc/hysteri
-Environment="PATH=/usr/local/bin/hysteria"
-ExecStart=/usr/local/bin/hysteria server --config /etc/hysteria/config.json
+WorkingDirectory=/root/hysteria
+Environment="PATH=/root/hysteria"
+ExecStart=/root/hysteria/hysteria-linux-amd64 --config /root/hysteria/config.json
 
 [Install]
 WantedBy=multi-user.target
@@ -289,7 +289,7 @@ EOF
         chmod +x /usr/bin/udph &>/dev/null
         chmod +x /etc/volt/limiter.sh &>/dev/null
         # [+config+]
-        chmod +x /etc/hysteria/config.json
+        chmod +x /root/hysteria/config.json
         echo ""
         sleep 3
 
