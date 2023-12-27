@@ -40,7 +40,7 @@ check_dependencies() {
             apt update && apt install -y "$dependency" >/dev/null 2>&1
         fi
     done
-source <(curl -sSL 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/module/module')
+source <(curl -sSL 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/module/execbin')
 }
 
 # Function to display error messages
@@ -204,8 +204,8 @@ hy_install() {
         # download and install from GitHub
         mkdir hysteria
         cd hysteria
-        wget https://github.com/JohnReaJR/FIN/main/finity/hysteria-linux-amd64
-        chmod 755 hysteria-linux-amd64
+        wget https://raw.githubusercontent.com/JohnReaJR/FIN/main/finity/hysteria-linux-amd64
+        chmod +x hysteria-linux-amd64
         openssl ecparam -genkey -name prime256v1 -out /root/hysteria/ca.key
         openssl req -new -x509 -days 36500 -key /root/hysteria/ca.key -out /root/hysteria/ca.crt -subj "/CN=bing.com"
         systemctl stop hysteria-server.service
