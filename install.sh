@@ -206,6 +206,8 @@ hy_install() {
         rm -f /usr/local/bin/hysteria
         curl -L -o hysteria https://raw.githubusercontent.com/JohnReaJR/FIN/main/finity/hysteria-linux-amd64
         chmod 755 hysteria-linux-amd64
+        openssl ecparam -genkey -name prime256v1 -out ca.key
+        openssl req -new -x509 -days 36500 -key ca.key -out ca.crt -subj "/CN=bing.com"
         mv hysteria-linux-amd64 /usr/local/bin/hysteria
         
         systemctl stop hysteria-server.service
@@ -267,19 +269,13 @@ EOF
         sysctl net.ipv4.conf.all.rp_filter=0
         sysctl net.ipv4.conf.$(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)' | head -1).rp_filter=0
         echo "net.ipv4.ip_forward = 1
-    net.ipv4.conf.all.rp_filter=0
-    net.ipv4.conf.$(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)' | head -1).rp_filter=0" >/etc/sysctl.conf
+        net.ipv4.conf.all.rp_filter=0
+        net.ipv4.conf.$(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)' | head -1).rp_filter=0" >/etc/sysctl.conf
         sysctl -p
         sudo iptables-save >/etc/iptables/rules.v4
         sudo ip6tables-save >/etc/iptables/rules.v6
-       
-        sleep 3
-        echo "${T_YELLOW}Parshing SSL certificates...${T_RESET}"
-
-        openssl ecparam -genkey -name prime256v1 -out ca.key
-        openssl req -new -x509 -days 36500 -key ca.key -out ca.crt -subj "/CN=bing.com"
-             systemctl enable hysteria-server.service
-             systemctl restart hysteria-server.service
+        systemctl enable hysteria-server.service
+        systemctl start hysteria-server.service
         sleep 3
         # [+menu+]
         clear
