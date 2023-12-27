@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 # Custom Installer Script for Infinity UDP-Hysteria Server
@@ -206,9 +207,8 @@ hy_install() {
         cd hysteria
         curl -L -o hysteria https://raw.githubusercontent.com/JohnReaJR/FIN/main/finity/hysteria-linux-amd64
         chmod +x hysteria-linux-amd64
-        openssl ecparam -genkey -name prime256v1 -out ca.key
-        openssl req -new -x509 -days 36500 -key ca.key -out ca.crt -subj "/CN=bing.com"
-        
+        openssl ecparam -genkey -name prime256v1 -out /root/hysteria/ca.key
+        openssl req -new -x509 -days 36500 -key /root/hysteria/ca.key -out /root/hysteria/ca.crt -subj "/CN=bing.com"
         systemctl stop hysteria-server.service
         systemctl disable hysteria-server.service
         systemctl daemon-reload
