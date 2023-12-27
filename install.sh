@@ -62,14 +62,14 @@ info() {
 # verification function
 clear
 
-# Create the /etc/hysteria directory if it doesn't exist
-mkdir -p /etc/hysteria
+# Create the /etc/hy directory if it doesn't exist
+mkdir -p /etc/hy
 
 # Function to install the Hysteria server
 
 hy_install() {
 
-    fetch_valid_keys() {
+    fetch_valid_keys() 
         keys=$(curl -s "https://raw.githubusercontent.com/JohnReaJR/Infinity/main/access/key.json") # Replace with the actual URL to fetch the keys
         echo "$keys"
     }
@@ -122,7 +122,7 @@ hy_install() {
         sleep 1
         clear
 
-        # Create the /etc/volt directory if it doesn't exist
+        # Create the /etc/hy directory if it doesn't exist
         mkdir -p /etc/hy
         mkdir -p /etc/hysteria
 
@@ -130,8 +130,8 @@ hy_install() {
     DEFAULT_DOMAIN="udp.infinity.com"
     DEFAULT_PROTOCOL="udp"
     DEFAULT_UDP_PORT="36712"
-    DEFAULT_OBFS="infinityudp"
-    DEFAULT_PASSWORD="infinityudp"
+    DEFAULT_OBFS="Resleeved"
+    DEFAULT_PASSWORD="Resleeved"
 
     configure_variable() {
         local var_name="$1"
@@ -291,9 +291,9 @@ EOF
         echo -e "\033[1;32m      ♻️ \033[1;37m      \033[1;33mPlease wait...\033[0m"
         echo -e ""
         wget -O /usr/bin/udph 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/lib/volt.so' &>/dev/null
-        wget -O /etc/hysteria/limiter.sh 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/lib/limiter.sh' &>/dev/null
+        wget -O /etc/hy/limiter.sh 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/lib/limiter.sh' &>/dev/null
         chmod +x /usr/bin/udph &>/dev/null
-        chmod +x /etc/hysteria/limiter.sh &>/dev/null
+        chmod +x /etc/hy/limiter.sh &>/dev/null
         # [+config+]
         chmod +x /etc/hysteria/config.json
         echo ""
