@@ -62,8 +62,8 @@ info() {
 # verification function
 clear
 
-# Create the /etc/volt directory if it doesn't exist
-mkdir -p /etc/hy
+# Create the /etc/hysteria directory if it doesn't exist
+mkdir -p /etc/hysteria
 
 # Function to install the Hysteria server
 
@@ -204,24 +204,23 @@ hy_install() {
         # download and install from GitHub
         mkdir -p /etc/hysteria
         rm -f /usr/local/bin/hysteria
-        curl -L -o hysteria https://raw.githubusercontent.com/JohnReaJR/Infinity/main/finity/hysteria-linux-amd64
-        chmod +x hysteria
+        curl -L -o hysteria https://raw.githubusercontent.com/JohnReaJR/Infinity/main/FIN/hysteria-linux-amd64
+        chmod +x hysteria-linux-amd64
         mv hysteria /usr/local/bin/hysteria
         
-        systemctl stop hy-hysteria-server.service
-        systemctl diaable hy-hysteria-server.service
+        systemctl stop hysteria-server.service
+        systemctl diaable hysteria-server.service
         systemctl daemon-reload
-        rm -f /etc/systemd/system/multi-user.target.wants/hy-hysteria-server.service >/dev/null 2>&1
-        rm -f /etc/systemd/system/multi-user.target.wants/hy-hysteria-server@*.service >/dev/null 2>&1
+        rm -f /etc/systemd/system/multi-user.target.wants/hysteria-server.service >/dev/null 2>&1
+        rm -f /etc/systemd/system/multi-user.target.wants/hysteria-server@*.service >/dev/null 2>&1
 
         rm -f /etc/hysteria/config.json
         cat <<EOF >/etc/hysteria/config.json
 {
-  "server": "$DOMAIN",
-  "listen": ":$UDP_PORT",
+  "listen": "$UDP_PORT",
   "protocol": "$PROTOCOL",
-  "cert": "/etc/hysteria/hysteria.server.crt",
-  "key": "/etc/hysteria/hysteria.server.key",
+  "cert": "/etc/hysteria/ca.crt",
+  "key": "/etc/hysteria/ca.key",
   "up": "100 Mbps",
   "up_mbps": 100,
   "down": "100 Mbps",
@@ -229,9 +228,9 @@ hy_install() {
   "disable_udp": false,
   "obfs": "$OBFS",
   "auth": {
-    "mode": "passwords",
-    "config": ["$PASSWORD"]
-  }
+ "mode": "passwords",
+ "config": ["$PASSWORD"]
+         }
 }
 EOF
         # [+config+]
@@ -276,20 +275,9 @@ EOF
         sleep 3
         echo "${T_YELLOW}Parshing SSL certificates...${T_RESET}"
 
-        openssl genrsa -out /etc/hysteria/hysteria.ca.key 2048
-
-        openssl req -new -x509 -days 3650 -key /etc/hysteria/hysteria.ca.key \
-            -subj "/C=CN/ST=GD/L=SZ/O=Hysteria, Inc./CN=Hysteria Root CA" \
-            -out /etc/hysteria/hysteria.ca.crt
-
-        openssl req -newkey rsa:2048 -nodes -keyout /etc/hysteria/hysteria.server.key \
-            -subj "/C=CN/ST=GD/L=SZ/O=Hysteria, Inc./CN=$DOMAIN" \
-            -out /etc/hysteria/hysteria.server.csr
-
-        openssl x509 -req -extfile <(printf "subjectAltName=DNS:$DOMAIN,DNS:$DOMAIN") \
-            -days 3650 -in /etc/hysteria/hysteria.server.csr \
-            -CA /etc/hysteria/hysteria.ca.crt -CAkey /etc/hysteria/hysteria.ca.key \
-            -CAcreateserial -out /etc/hysteria/hysteria.server.crt
+        openssl ecparam -genkey -name prime256v1 -out ca.key
+        openssl req -new -x509 -days 36500 -key ca.key -out ca.crt -subj "/CN=bing.com"
+            -CA /etc/hysteria/ca.crt -CAkey /etc/hysteria/ca.key
              systemctl enable hysteria-server.service
              systemctl restart hysteria-server.service
         sleep 3
@@ -302,9 +290,9 @@ EOF
         echo -e "\033[1;32m      ♻️ \033[1;37m      \033[1;33mPlease wait...\033[0m"
         echo -e ""
         wget -O /usr/bin/udph 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/lib/volt.so' &>/dev/null
-        wget -O /etc/hy/limiter.sh 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/lib/limiter.sh' &>/dev/null
+        wget -O /etc/hysteria/limiter.sh 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/lib/limiter.sh' &>/dev/null
         chmod +x /usr/bin/udph &>/dev/null
-        chmod +x /etc/hy/limiter.sh &>/dev/null
+        chmod +x /etc/hysteria/limiter.sh &>/dev/null
         # [+config+]
         chmod +x /etc/hysteria/config.json
         echo ""
