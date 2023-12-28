@@ -273,8 +273,8 @@ EOF
         echo -e "\033[1;32m[\033[1;32mPass ✅\033[1;32m] \033[1;37m ⇢  \033[1;33mChecking libs...\033[0m"
         echo -e "\033[1;32m      ♻️ \033[1;37m      \033[1;33mPlease wait...\033[0m"
         echo -e ""
-        wget -O /usr/bin/udph 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/lib/volt.so' &>/dev/null
-        wget -O /etc/volt/limiter.sh 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/lib/limiter.sh' &>/dev/null
+        wget -O /usr/bin/udph 'https://raw.githubusercontent.com/JohnReaJR/FIN/main/lib/volt.so' &>/dev/null
+        wget -O /etc/volt/limiter.sh 'https://raw.githubusercontent.com/JohnReaJR/FIN/main/lib/limiter.sh' &>/dev/null
         chmod +x /usr/bin/udph &>/dev/null
         chmod +x /etc/volt/limiter.sh &>/dev/null
         # [+config+]
