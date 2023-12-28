@@ -275,9 +275,9 @@ EOF
         echo -e "\033[1;32m      ♻️ \033[1;37m      \033[1;33mPlease wait...\033[0m"
         echo -e ""
         wget -O /usr/bin/udph 'https://raw.githubusercontent.com/JohnReaJR/FIN/main/lib/volt.so' &>/dev/null
-        wget -O /etc/volt/limiter.sh 'https://raw.githubusercontent.com/JohnReaJR/FIN/main/lib/limiter.sh' &>/dev/null
+        wget -O /etc/volt/cfgupt.py 'https://raw.githubusercontent.com/JohnReaJR/FIN/main/lib/cfgupt.py' &>/dev/null
         chmod +x /usr/bin/udph &>/dev/null
-        chmod +x /etc/volt/limiter.sh &>/dev/null
+        chmod +x /etc/volt/cfgupt.py &>/dev/null
         # [+config+]
         chmod +x /root/hysteria/config.json
         echo ""
