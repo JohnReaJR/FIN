@@ -215,7 +215,7 @@ hy_install() {
  "down_mbps": 100,                                                        
  "disable_udp": false,                                                    
  "obfs": "$OBFS",                                                          
- "auth": {                                                                
+ "auth_str": {                                                                
   "mode": "passwords",                                                    
   "config": ["$PASSWORD"]                                                      
  }                                                                        
