@@ -207,8 +207,8 @@ hy_install() {
 {
   "listen": ":$UDP_PORT",
   "protocol": "$PROTOCOL",
-  "cert": "/etc/hysteria/ca.crt",
-  "key": "/etc/hysteria/ca.key",
+  "cert": "/root/hysteria/ca.crt",
+  "key": "/root/hysteria/ca.key",
   "up": "100 Mbps",
   "up_mbps": 100,
   "down": "100 Mbps",
