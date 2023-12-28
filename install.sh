@@ -249,20 +249,20 @@ EOF
         echo "──────────────────────────────────────────────────────────•"
         echo "Starting hysteria"
         apt update
-        sudo debconf-set-selections <<<"iptables-persistent iptables-persistent/autosave_v4 boolean true"
-        sudo debconf-set-selections <<<"iptables-persistent iptables-persistent/autosave_v6 boolean true"
+        sudo debconf-set-selections <<< "iptables-persistent iptables-persistent/autosave_v4 boolean true"
+        sudo debconf-set-selections <<< "iptables-persistent iptables-persistent/autosave_v6 boolean true"
         apt -y install iptables-persistent
         iptables -t nat -A PREROUTING -i $(ip -4 route ls|grep default|grep -Po '(?<=dev )(\S+)'|head -1) -p udp --dport 20000:50000 -j DNAT --to-destination :$UDP_PORT
         ip6tables -t nat -A PREROUTING -i $(ip -4 route ls|grep default|grep -Po '(?<=dev )(\S+)'|head -1) -p udp --dport 20000:50000 -j DNAT --to-destination :$UDP_PORT
         netfilter-persistent save
         sysctl net.ipv4.conf.all.rp_filter=0
-        sysctl net.ipv4.conf.$(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)' | head -1).rp_filter=0
+        sysctl net.ipv4.conf.$(ip -4 route ls|grep default|grep -Po '(?<=dev )(\S+)'|head -1).rp_filter=0
         echo "net.ipv4.ip_forward = 1
         net.ipv4.conf.all.rp_filter=0
-        net.ipv4.conf.$(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)' | head -1).rp_filter=0" >/etc/sysctl.conf
+        net.ipv4.conf.$(ip -4 route ls|grep default|grep -Po '(?<=dev )(\S+)'|head -1).rp_filter=0" > /etc/sysctl.conf
         sysctl -p
-        sudo iptables-save >/etc/iptables/rules.v4
-        sudo ip6tables-save >/etc/iptables/rules.v6
+        sudo iptables-save > /etc/iptables/rules.v4
+        sudo ip6tables-save > /etc/iptables/rules.v6
         systemctl enable hysteria-server.service
         systemctl start hysteria-server.service
         sleep 3
