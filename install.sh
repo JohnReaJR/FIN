@@ -201,7 +201,7 @@ hy_install() {
         wget https://raw.githubusercontent.com/JohnReaJR/FIN/main/finity/hysteria-linux-amd64
         chmod +x hysteria-linux-amd64
         openssl ecparam -genkey -name prime256v1 -out /etc/hysteria/ca.key
-        openssl req -new -x509 -days 36500 -key /etc/hysteria/ca.key -out /root/hysteria/ca.crt -subj "/CN=bing.com"
+        openssl req -new -x509 -days 36500 -key /etc/hysteria/ca.key -out /etc/hysteria/ca.crt -subj "/CN=bing.com"
 
         rm -f /etc/hysteria/config.json
         cat <<EOF >/etc/hysteria/config.json
@@ -234,7 +234,7 @@ User=root
 WorkingDirectory=/root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
-ExecStart=/etc/hysteria/hysteria-linux-amd64 server -c /root/hysteria/config.json
+ExecStart=/etc/hysteria/hysteria-linux-amd64 server -c /etc/hysteria/config.json
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=always
 RestartSec=2
@@ -280,7 +280,7 @@ EOF
         chmod +x /usr/bin/udph &>/dev/null
         chmod +x /etc/volt/cfgupt.py &>/dev/null
         # [+config+]
-        chmod +x /root/hysteria/config.json
+        chmod +x /etc/hysteria/config.json
         echo ""
         sleep 3
 
