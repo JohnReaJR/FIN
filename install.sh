@@ -247,7 +247,7 @@ EOF
         clear
         figlet -k mtk-udp | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
         echo "──────────────────────────────────────────────────────────•"
-        echo "${T_YELLOW}Starting cold services...${T_RESET}"
+        echo "Starting hysteria"
         apt update
         sudo debconf-set-selections <<<"iptables-persistent iptables-persistent/autosave_v4 boolean true"
         sudo debconf-set-selections <<<"iptables-persistent iptables-persistent/autosave_v6 boolean true"
