@@ -93,7 +93,7 @@ hy_install() {
     echo ""
     echo ""
     echo -e " 〄 \033[1;37m ⌯  \033[1;33mYou must have purchased a Key\033[0m"
-    echo -e " 〄 \033[1;37m ⌯  \033[1;33mif you didn't, contact [INFINITY]\033[0m"
+    echo -e " 〄 \033[1;37m ⌯  \033[1;33mif you didn't, contact [InFiNitY]\033[0m"
     echo -e " 〄 \033[1;37m ⌯ ⇢ \033[1;33mhttps://t.me/VeCNa_rK_bot\033[0m"
     echo ""
     echo "──────────────────────────────────────────────────────────•"
@@ -205,22 +205,17 @@ hy_install() {
 
         rm -f /etc/hy/config.json
         cat <<EOF >/etc/hy/config.json
-{
-  "listen": ":$UDP_PORT",
-  "protocol": "$PROTOCOL",
-  "cert": "/etc/hy/ca.crt",
-  "key": "/etc/hy/ca.key",
-  "up": "100 Mbps",
-  "up_mbps": 100,
-  "down": "100 Mbps",
-  "down_mbps": 100,
-  "disable_udp": false,
-  "obfs": "$OBFS",
-  "auth": {
-    "mode": "passwords",
-    "config": ["$PASSWORD"]
-  }
-}
+{"listen":":$UDP_PORT",
+"protocol":"$PROTOCOL",
+"cert":"/etc/hy/ca.crt",
+"key":"/etc/hy/ca.key",
+"up":"100 Mbps",
+"up_mbps":100,
+"down":"100 Mbps",
+"down_mbps":100,
+"disable_udp":false,
+"obfs":"$OBFS",
+"auth_str":"$PASSWORD"}
 EOF
         # [+config+]
         chmod +x /etc/hy/config.json
