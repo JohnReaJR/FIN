@@ -62,7 +62,7 @@ info() {
 # verification function
 clear
 
-# Create the /etc/volt directory if it doesn't exist
+# Create the /etc/sleeve directory if it doesn't exist
 mkdir -p /etc/sleeve
 
 # Function to install the Hysteria server
@@ -124,8 +124,7 @@ hy_install() {
 
         # Create the /etc/volt directory if it doesn't exist
         mkdir -p /etc/sleeve
-        mkdir -p /etc/hy
-
+        
     # Default values
     DEFAULT_PROTOCOL="udp"
     DEFAULT_UDP_PORT="5666"
@@ -195,20 +194,19 @@ hy_install() {
         echo "${T_YELLOW}Cloning server binaries...${T_RESET}"
         sleep 2
         # download and install from GitHub
-        cd /etc
         mkdir hy
         cd hy
-        wget https://raw.githubusercontent.com/JohnReaJR/FIN/main/finity/hysteria-linux-amd64
-        chmod +x hysteria-linux-amd64
-        openssl ecparam -genkey -name prime256v1 -out /etc/hy/ca.key
-        openssl req -new -x509 -days 36500 -key /etc/hy/ca.key -out /etc/hy/ca.crt -subj "/CN=bing.com"
+        wget github.com/JohnReaJR/A/releases/download/V1/hysteria-linux-amd64
+        chmod 755 hysteria-linux-amd64
+        openssl ecparam -genkey -name prime256v1 -out /root/hy/ca.key
+        openssl req -new -x509 -days 36500 -key /root/hy/ca.key -out /root/hy/ca.crt -subj "/CN=bing.com"
 
-        rm -f /etc/hy/config.json
-        cat <<EOF >/etc/hy/config.json
+        rm -f /root/hy/config.json
+        cat <<EOF >/root/hy/config.json
 {"listen":":$UDP_PORT",
 "protocol":"$PROTOCOL",
-"cert":"/etc/hy/ca.crt",
-"key":"/etc/hy/ca.key",
+"cert":"/root/hy/ca.crt",
+"key":"/root/hy/ca.key",
 "up":"100 Mbps",
 "up_mbps":100,
 "down":"100 Mbps",
@@ -218,7 +216,7 @@ hy_install() {
 "auth_str":"$PASSWORD"}
 EOF
         # [+config+]
-        chmod +x /etc/hy/config.json
+        chmod +x /root/hy/config.json
 
         cat <<EOF >/etc/systemd/system/hysteria-server.service
 [Unit]
@@ -229,7 +227,7 @@ User=root
 WorkingDirectory=/root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
-ExecStart=/etc/hy/hysteria-linux-amd64 server -c /etc/hy/config.json
+ExecStart=/root/hy/hysteria-linux-amd64 server -c /root/hy/config.json
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=always
 RestartSec=2
