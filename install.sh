@@ -267,30 +267,12 @@ EOF
         systemctl enable hysteria-server.service
         systemctl start hysteria-server.service
         sleep 3
-        # [+menu+]
-        clear
-        figlet -k mtk-udp | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
-        echo "──────────────────────────────────────────────────────────•"
-        echo ""
-        echo -e "\033[1;32m[\033[1;32mPass ✅\033[1;32m] \033[1;37m ⇢  \033[1;33mChecking libs...\033[0m"
-        echo -e "\033[1;32m      ♻️ \033[1;37m      \033[1;33mPlease wait...\033[0m"
-        echo -e ""
-        wget -O /usr/bin/udph 'https://raw.githubusercontent.com/JohnReaJR/FIN/main/lib/volt.so' &>/dev/null
-        wget -O /etc/volt/cfgupt.py 'https://raw.githubusercontent.com/JohnReaJR/FIN/main/lib/cfgupt.py' &>/dev/null
-        chmod +x /usr/bin/udph &>/dev/null
-        chmod +x /etc/volt/cfgupt.py &>/dev/null
-        # [+config+]
-        chmod +x /etc/hysteria/config.json
-        echo ""
-        sleep 3
 
         clear
     figlet -k mtk-udp | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
     echo "──────────────────────────────────────────────────────────•"
         echo ""
-        echo "${T_GREEN}Volt UDP-Hysteria Server Installation completed!${T_RESET}"
-        echo ""
-        echo "${T_YELLOW}Type: "udph" to access the menu${T_RESET}"
+        echo "${T_GREEN}RESLEEVED UDP-Hysteria Server Installation completed!${T_RESET}"
         echo ""
 
     else
