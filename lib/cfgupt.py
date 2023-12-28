@@ -1,6 +1,6 @@
 import json
 
-config_file = "/etc/hysteria/config.json"
+config_file = "/root/hysteria/config.json"
 
 # Read existing config
 with open(config_file, "r") as f:
