@@ -127,7 +127,6 @@ hy_install() {
         mkdir -p /root/hysteria
 
     # Default values
-    DEFAULT_DOMAIN="udp.infinity.com"
     DEFAULT_PROTOCOL="udp"
     DEFAULT_UDP_PORT="36712"
     DEFAULT_OBFS="Resleeved"
@@ -157,7 +156,6 @@ hy_install() {
 
         # Save user input to a file
         case "$var_name" in
-        "DOMAIN") echo "${!var_name}" >/etc/volt/DOMAIN ;;
         "PROTOCOL") echo "${!var_name}" >/etc/volt/PROTOCOL ;;
         "UDP_PORT") echo "${!var_name}" >/etc/volt/UDP_PORT ;;
         "OBFS") echo "${!var_name}" >/etc/volt/OBFS ;;
@@ -165,7 +163,6 @@ hy_install() {
         esac
 
         # Export user input as environment variables
-        export DOMAIN
         export PROTOCOL
         export UDP_PORT
         export OBFS
@@ -177,10 +174,6 @@ hy_install() {
         clear
         figlet -k mtk-udp | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
         echo "──────────────────────────────────────────────────────────•"
-        echo ""
-        echo ""
-        echo "Enter Domain Name (e.g., udp.infinity.com)"
-        configure_variable "DOMAIN" "=>" "$DEFAULT_DOMAIN"
         echo ""
         echo "Enter Protocol (e.g., udp)"
         configure_variable "PROTOCOL" "=>" "$DEFAULT_PROTOCOL"
@@ -211,22 +204,21 @@ hy_install() {
 
         rm -f /root/hysteria/config.json
         cat <<EOF >/root/hysteria/config.json
-{
-  "server": "$DOMAIN",
-  "listen": "$UDP_PORT",
-  "protocol": "$PROTOCOL",
-  "cert": "/root/hysteria/ca.crt",
-  "key": "/root/hysteria/ca.key",
-  "up": "100 Mbps",
-  "up_mbps": 100,
-  "down": "100 Mbps",
-  "down_mbps": 100,
-  "disable_udp": false,
-  "obfs": "$OBFS",
-  "auth": {
- "mode": "passwords",
- "config": ["$PASSWORD"]
-         }
+{                                                                         
+ "listen": ":$UDP_PORT",                                                      
+ "protocol": "$PROTOCOL",                                                       
+ "cert": "/root/hysteria/ca.crt",                                                
+ "key": "/root/hysteria/ca.key",                                                 
+ "up": "100 Mbps",                                                        
+ "up_mbps": 100,                                                          
+ "down": "100 Mbps",                                                      
+ "down_mbps": 100,                                                        
+ "disable_udp": false,                                                    
+ "obfs": "$OBFS",                                                          
+ "auth": {                                                                
+  "mode": "passwords",                                                    
+  "config": ["$PASSWORD"]                                                      
+ }                                                                        
 }
 EOF
         # [+config+]
