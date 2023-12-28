@@ -112,8 +112,8 @@ hy_install() {
     # Verify the key
     if verify_key "$user_key" "$valid_keys"; then
         sleep 2
-        echo "${T_GREEN} ⇢ Verification successful.${T_RESET}"
-        echo "${T_GREEN} ⇢ Proceeding with the installation...${T_RESET}"
+        echo "${T_YELLOW} ⇢ Verification successful.${T_RESET}"
+        echo "${T_YELLOW} ⇢ Proceeding with the installation...${T_RESET}"
         echo ""
         echo ""
         echo -e "\033[1;32m ♻️ Please wait...\033[0m"
@@ -242,7 +242,9 @@ EOF
         figlet -k Resleeved | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k Net | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
         echo "──────────────────────────────────────────────────────────•"
         echo "Starting hysteria"
-        apt update
+        apt-get update && apt-get upgrade
+        apt update && apt upgrade
+        apt install net-tools
         sudo debconf-set-selections <<< "iptables-persistent iptables-persistent/autosave_v4 boolean true"
         sudo debconf-set-selections <<< "iptables-persistent iptables-persistent/autosave_v6 boolean true"
         apt -y install iptables-persistent
@@ -265,7 +267,7 @@ EOF
     figlet -k Resleeved | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k Net | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
     echo "──────────────────────────────────────────────────────────•"
         echo ""
-        echo "${T_GREEN}RESLEEVED NET HYSTERIA SERVER Installation completed!${T_RESET}"
+        echo "${T_YELLOW}RESLEEVED NET HYSTERIA SERVER Installation completed!${T_RESET}"
         echo ""
 
     else
