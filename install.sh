@@ -88,7 +88,7 @@ hy_install() {
     valid_keys=$(fetch_valid_keys)
 
     echo ""
-    figlet -k RESLEEVED-NET | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
+    figlet -k Resleeved | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k Net | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
     echo "──────────────────────────────────────────────────────────•"
     echo ""
     echo ""
@@ -172,7 +172,7 @@ hy_install() {
     # Configuration for each variable
         # Prompt for domain and other values
         clear
-        figlet -k RESLEEVED-NET | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
+        figlet -k Resleeved | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k Net | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
         echo "──────────────────────────────────────────────────────────•"
         echo ""
         echo "Enter Protocol (e.g., udp)"
@@ -190,7 +190,7 @@ hy_install() {
         sleep 3
 
         clear
-        figlet -k RESLEEVED-NET | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
+        figlet -k Resleeved | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k Net | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
         echo "──────────────────────────────────────────────────────────•"
         echo "${T_YELLOW}Cloning server binaries...${T_RESET}"
         sleep 2
@@ -241,7 +241,7 @@ EOF
 
         # Function to start services
         clear
-        figlet -k RESLEEVED-NET | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
+        figlet -k Resleeved | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k Net | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
         echo "──────────────────────────────────────────────────────────•"
         echo "Starting hysteria"
         apt update
@@ -264,7 +264,7 @@ EOF
         sleep 3
 
         clear
-    figlet -k RESLEEVED-NET | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
+    figlet -k Resleeved | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k Net | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
     echo "──────────────────────────────────────────────────────────•"
         echo ""
         echo "${T_GREEN}RESLEEVED NET HYSTERIA SERVER Installation completed!${T_RESET}"
@@ -272,7 +272,7 @@ EOF
 
     else
         clear
-        figlet -k RESLEEVED-NET | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
+        figlet -k Resleeved | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k Net | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
         echo "──────────────────────────────────────────────────────────•"
         echo "${T_RED} ⇢ Verification failed. Aborting installation.${T_RESET}"
         exit 1
