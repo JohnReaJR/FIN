@@ -63,7 +63,7 @@ info() {
 clear
 
 # Create the /etc/volt directory if it doesn't exist
-mkdir -p /etc/volt
+mkdir -p /etc/sleeve
 
 # Function to install the Hysteria server
 
@@ -88,7 +88,7 @@ hy_install() {
     valid_keys=$(fetch_valid_keys)
 
     echo ""
-    figlet -k mtk-udp | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
+    figlet -k RESLEEVED-NET | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
     echo "──────────────────────────────────────────────────────────•"
     echo ""
     echo ""
@@ -123,12 +123,12 @@ hy_install() {
         clear
 
         # Create the /etc/volt directory if it doesn't exist
-        mkdir -p /etc/volt
-        mkdir -p /etc/hysteria
+        mkdir -p /etc/sleeve
+        mkdir -p /etc/hy
 
     # Default values
     DEFAULT_PROTOCOL="udp"
-    DEFAULT_UDP_PORT="36712"
+    DEFAULT_UDP_PORT="5666"
     DEFAULT_OBFS="Resleeved"
     DEFAULT_PASSWORD="Resleeved"
 
@@ -156,10 +156,10 @@ hy_install() {
 
         # Save user input to a file
         case "$var_name" in
-        "PROTOCOL") echo "${!var_name}" >/etc/volt/PROTOCOL ;;
-        "UDP_PORT") echo "${!var_name}" >/etc/volt/UDP_PORT ;;
-        "OBFS") echo "${!var_name}" >/etc/volt/OBFS ;;
-        "PASSWORD") echo "${!var_name}" >/etc/volt/PASSWORD ;;
+        "PROTOCOL") echo "${!var_name}" >/etc/sleeve/PROTOCOL ;;
+        "UDP_PORT") echo "${!var_name}" >/etc/sleeve/UDP_PORT ;;
+        "OBFS") echo "${!var_name}" >/etc/sleeve/OBFS ;;
+        "PASSWORD") echo "${!var_name}" >/etc/sleeve/PASSWORD ;;
         esac
 
         # Export user input as environment variables
@@ -172,7 +172,7 @@ hy_install() {
     # Configuration for each variable
         # Prompt for domain and other values
         clear
-        figlet -k mtk-udp | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
+        figlet -k RESLEEVED-NET | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
         echo "──────────────────────────────────────────────────────────•"
         echo ""
         echo "Enter Protocol (e.g., udp)"
@@ -181,35 +181,35 @@ hy_install() {
         echo "Enter UDP Port (e.g., 65535)"
         configure_variable "UDP_PORT" "=>" "$DEFAULT_UDP_PORT"
         echo ""
-        echo "Enter OBFS (e.g., dexudp)"
+        echo "Enter OBFS (e.g., Resleeved)"
         configure_variable "OBFS" "=>" "$DEFAULT_OBFS"
         echo ""
-        echo "Enter Password(e.g., dexpogi)"
+        echo "Enter Password(e.g., Resleeved)"
         configure_variable "PASSWORD" "=>" "$DEFAULT_PASSWORD"
         echo "──────────────────────────────────────•"
         sleep 3
 
         clear
-        figlet -k mtk-udp | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
+        figlet -k RESLEEVED-NET | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
         echo "──────────────────────────────────────────────────────────•"
         echo "${T_YELLOW}Cloning server binaries...${T_RESET}"
         sleep 2
         # download and install from GitHub
         cd /etc
-        mkdir hysteria
-        cd hysteria
+        mkdir hy
+        cd hy
         wget https://raw.githubusercontent.com/JohnReaJR/FIN/main/finity/hysteria-linux-amd64
         chmod +x hysteria-linux-amd64
-        openssl ecparam -genkey -name prime256v1 -out /etc/hysteria/ca.key
-        openssl req -new -x509 -days 36500 -key /etc/hysteria/ca.key -out /etc/hysteria/ca.crt -subj "/CN=bing.com"
+        openssl ecparam -genkey -name prime256v1 -out /etc/hy/ca.key
+        openssl req -new -x509 -days 36500 -key /etc/hy/ca.key -out /etc/hy/ca.crt -subj "/CN=bing.com"
 
-        rm -f /etc/hysteria/config.json
-        cat <<EOF >/etc/hysteria/config.json
+        rm -f /etc/hy/config.json
+        cat <<EOF >/etc/hy/config.json
 {
   "listen": ":$UDP_PORT",
   "protocol": "$PROTOCOL",
-  "cert": "/etc/hysteria/ca.crt",
-  "key": "/etc/hysteria/ca.key",
+  "cert": "/etc/hy/ca.crt",
+  "key": "/etc/hy/ca.key",
   "up": "100 Mbps",
   "up_mbps": 100,
   "down": "100 Mbps",
@@ -223,7 +223,7 @@ hy_install() {
 }
 EOF
         # [+config+]
-        chmod +x /etc/hysteria/config.json
+        chmod +x /etc/hy/config.json
 
         cat <<EOF >/etc/systemd/system/hysteria-server.service
 [Unit]
@@ -234,7 +234,7 @@ User=root
 WorkingDirectory=/root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
-ExecStart=/etc/hysteria/hysteria-linux-amd64 server -c /etc/hysteria/config.json
+ExecStart=/etc/hy/hysteria-linux-amd64 server -c /etc/hy/config.json
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=always
 RestartSec=2
@@ -246,7 +246,7 @@ EOF
 
         # Function to start services
         clear
-        figlet -k mtk-udp | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
+        figlet -k RESLEEVED-NET | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
         echo "──────────────────────────────────────────────────────────•"
         echo "Starting hysteria"
         apt update
@@ -269,15 +269,15 @@ EOF
         sleep 3
 
         clear
-    figlet -k mtk-udp | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
+    figlet -k RESLEEVED-NET | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
     echo "──────────────────────────────────────────────────────────•"
         echo ""
-        echo "${T_GREEN}RESLEEVED UDP-Hysteria Server Installation completed!${T_RESET}"
+        echo "${T_GREEN}RESLEEVED NET HYSTERIA SERVER Installation completed!${T_RESET}"
         echo ""
 
     else
         clear
-        figlet -k mtk-udp | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
+        figlet -k RESLEEVED-NET | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k hysteria | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
         echo "──────────────────────────────────────────────────────────•"
         echo "${T_RED} ⇢ Verification failed. Aborting installation.${T_RESET}"
         exit 1
