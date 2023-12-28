@@ -204,17 +204,22 @@ hy_install() {
 
         rm -f /root/hysteria/config.json
         cat <<EOF >/root/hysteria/config.json
-{"listen":":$UDP_PORT",
-"protocol":"$PROTOCOL",
-"cert":"/root/hysteria/ca.crt",
-"key":"/root/hysteria/ca.key",
-"up":"100 Mbps",
-"up_mbps":100,
-"down":"100 Mbps",
-"down_mbps":100,
-"disable_udp":false,
-"obfs":"$OBFS",
-"auth_str":"$PASSWORD"}
+{
+  "listen": ":$UDP_PORT",
+  "protocol": "$PROTOCOL",
+  "cert": "/etc/hysteria/hysteria.server.crt",
+  "key": "/etc/hysteria/hysteria.server.key",
+  "up": "100 Mbps",
+  "up_mbps": 100,
+  "down": "100 Mbps",
+  "down_mbps": 100,
+  "disable_udp": false,
+  "obfs": "$OBFS",
+  "auth": {
+    "mode": "passwords",
+    "config": ["$PASSWORD"]
+  }
+}
 EOF
         # [+config+]
         chmod +x /root/hysteria/config.json
