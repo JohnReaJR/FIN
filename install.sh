@@ -124,7 +124,7 @@ hy_install() {
 
         # Create the /etc/volt directory if it doesn't exist
         mkdir -p /etc/volt
-        mkdir -p /root/hysteria
+        mkdir -p /etc/hysteria
 
     # Default values
     DEFAULT_PROTOCOL="udp"
@@ -195,20 +195,21 @@ hy_install() {
         echo "${T_YELLOW}Cloning server binaries...${T_RESET}"
         sleep 2
         # download and install from GitHub
+        cd /etc
         mkdir hysteria
         cd hysteria
         wget https://raw.githubusercontent.com/JohnReaJR/FIN/main/finity/hysteria-linux-amd64
         chmod +x hysteria-linux-amd64
-        openssl ecparam -genkey -name prime256v1 -out /root/hysteria/ca.key
-        openssl req -new -x509 -days 36500 -key /root/hysteria/ca.key -out /root/hysteria/ca.crt -subj "/CN=bing.com"
+        openssl ecparam -genkey -name prime256v1 -out /etc/hysteria/ca.key
+        openssl req -new -x509 -days 36500 -key /etc/hysteria/ca.key -out /root/hysteria/ca.crt -subj "/CN=bing.com"
 
-        rm -f /root/hysteria/config.json
-        cat <<EOF >/root/hysteria/config.json
+        rm -f /etc/hysteria/config.json
+        cat <<EOF >/etc/hysteria/config.json
 {
   "listen": ":$UDP_PORT",
   "protocol": "$PROTOCOL",
-  "cert": "/root/hysteria/ca.crt",
-  "key": "/root/hysteria/ca.key",
+  "cert": "/etc/hysteria/ca.crt",
+  "key": "/etc/hysteria/ca.key",
   "up": "100 Mbps",
   "up_mbps": 100,
   "down": "100 Mbps",
@@ -222,7 +223,7 @@ hy_install() {
 }
 EOF
         # [+config+]
-        chmod +x /root/hysteria/config.json
+        chmod +x /etc/hysteria/config.json
 
         cat <<EOF >/etc/systemd/system/hysteria-server.service
 [Unit]
@@ -233,7 +234,7 @@ User=root
 WorkingDirectory=/root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
-ExecStart=/root/hysteria/hysteria-linux-amd64 server -c /root/hysteria/config.json
+ExecStart=/etc/hysteria/hysteria-linux-amd64 server -c /root/hysteria/config.json
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=always
 RestartSec=2
