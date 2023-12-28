@@ -257,8 +257,8 @@ EOF
         sysctl net.ipv4.conf.all.rp_filter=0
         sysctl net.ipv4.conf.$(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)' | head -1).rp_filter=0
         echo "net.ipv4.ip_forward = 1
-        net.ipv4.conf.all.rp_filter=0
-        net.ipv4.conf.$(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)' | head -1).rp_filter=0" >/etc/sysctl.conf
+    net.ipv4.conf.all.rp_filter=0
+    net.ipv4.conf.$(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)' | head -1).rp_filter=0" >/etc/sysctl.conf
         sysctl -p
         sudo iptables-save >/etc/iptables/rules.v4
         sudo ip6tables-save >/etc/iptables/rules.v6
