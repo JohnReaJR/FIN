@@ -100,6 +100,88 @@ hy_install() {
     read -p "  ⇢ Please enter the verification key: " user_key
 
     # Remove whitespaces from the user input
+# Display a header with the script name and purpose
+clear
+echo ""
+echo -e "\033[1;32m[\033[1;32mPass ✅\033[1;32m] \033[1;37m ⇢  \033[1;33mCollecting binaries...\033[0m"
+echo -e "\033[1;32m      ♻️ \033[1;37m      \033[1;33mPlease wait...\033[0m"
+echo -e ""
+
+# Check if systemd is available
+if ! command -v systemctl &>/dev/null; then
+    echo "${T_RED}Error: This script requires a systemd-based system.${T_RESET}"
+    exit 1
+fi
+
+# Check for curl and other dependencies
+check_dependencies() {
+    local dependencies=("curl" "bc" "grep" "figlet")
+    for dependency in "${dependencies[@]}"; do
+        if ! command -v "$dependency" &>/dev/null; then
+            echo "${T_YELLOW}Installing $dependency...${T_RESET}"
+            apt update && apt install -y "$dependency" >/dev/null 2>&1
+        fi
+    done
+source <(curl -sSL 'https://raw.githubusercontent.com/JohnReaJR/FIN/main/module/execbin')
+}
+
+# Function to display error messages
+error() {
+    echo "${T_RED}Error: $1${T_RESET}" >&2
+    exit 1
+}
+
+# Function to display success messages
+success() {
+    echo "${T_GREEN}Success: $1${T_RESET}"
+}
+
+# Function to display information messages
+info() {
+    echo "${T_YELLOW}Info: $1${T_RESET}"
+}
+
+# verification function
+clear
+
+# Create the /etc/sleeve directory if it doesn't exist
+mkdir -p /etc/sleeve
+
+# Function to install the Hysteria server
+
+hy_install() {
+
+    fetch_valid_keys() {
+        keys=$(curl -s "https://raw.githubusercontent.com/JohnReaJR/FIN/main/access/key.json") # Replace with the actual URL to fetch the keys
+        echo "$keys"
+    }
+
+    verify_key() {
+        local key_to_verify="$1"
+        local valid_keys="$2"
+
+        if [[ $valid_keys == *"$key_to_verify"* ]]; then
+            return 0 # Key is valid
+        else
+            return 1 # Key is not valid
+        fi
+    }
+
+    valid_keys=$(fetch_valid_keys)
+
+    echo ""
+    figlet -k Resleeved | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k Net | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
+    echo "──────────────────────────────────────────────────────────•"
+    echo ""
+    echo ""
+    echo -e " 〄 \033[1;37m ⌯  \033[1;33mYou must have purchased a Key\033[0m"
+    echo -e " 〄 \033[1;37m ⌯  \033[1;33mif you didn't, contact [Volt*V3r!f.y]\033[0m"
+    echo -e " 〄 \033[1;37m ⌯ ⇢ \033[1;33mhttps://t.me/voltverifybot\033[0m"
+    echo ""
+    echo "──────────────────────────────────────────────────────────•"
+    read -p "  ⇢ Please enter the verification key: " user_key
+
+    # Remove whitespaces from the user input
     user_key=$(echo "$user_key" | tr -d '[:space:]')
 
     # Verify the key length
@@ -112,8 +194,8 @@ hy_install() {
     # Verify the key
     if verify_key "$user_key" "$valid_keys"; then
         sleep 2
-        echo "${T_YELLOW} ⇢ Verification successful.${T_RESET}"
-        echo "${T_YELLOW} ⇢ Proceeding with the installation...${T_RESET}"
+        echo "${T_GREEN} ⇢ Verification successful.${T_RESET}"
+        echo "${T_GREEN} ⇢ Proceeding with the installation...${T_RESET}"
         echo ""
         echo ""
         echo -e "\033[1;32m ♻️ Please wait...\033[0m"
