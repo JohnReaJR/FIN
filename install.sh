@@ -356,3 +356,5 @@ EOF
 }
 
 ##--Installation--##
+check_dependencies
+install
