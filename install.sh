@@ -208,6 +208,7 @@ hy_install() {
         mkdir -p /etc/sleeve
         
     # Default values
+    DEFAULT_PROTOCOL="udp"
     DEFAULT_UDP_PORT="5666"
     DEFAULT_OBFS="Resleeved"
     DEFAULT_PASSWORD="Resleeved"
@@ -236,12 +237,14 @@ hy_install() {
 
         # Save user input to a file
         case "$var_name" in
+        "PROTOCOL") echo "${!var_name}" >/etc/sleeve/PROTOCOL ;;
         "UDP_PORT") echo "${!var_name}" >/etc/sleeve/UDP_PORT ;;
         "OBFS") echo "${!var_name}" >/etc/sleeve/OBFS ;;
         "PASSWORD") echo "${!var_name}" >/etc/sleeve/PASSWORD ;;
         esac
 
         # Export user input as environment variables
+        export PROTOCOL
         export UDP_PORT
         export OBFS
         export PASSWORD
@@ -253,6 +256,10 @@ hy_install() {
         figlet -k Resleeved | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k Net | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
         echo "──────────────────────────────────────────────────────────•"
         echo ""
+        echo ""
+        echo "Enter Protocol (e.g., udp)"
+        configure_variable "PROTOCOL" "=>" "$DEFAULT_PROTOCOL"
+        echo ""
         echo "Enter UDP Port (e.g., 65535)"
         configure_variable "UDP_PORT" "=>" "$DEFAULT_UDP_PORT"
         echo ""
@@ -263,7 +270,6 @@ hy_install() {
         configure_variable "PASSWORD" "=>" "$DEFAULT_PASSWORD"
         echo "──────────────────────────────────────•"
         sleep 3
-
         clear
         figlet -k Resleeved | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k Net | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
         echo "──────────────────────────────────────────────────────────•"
@@ -280,7 +286,7 @@ hy_install() {
         rm -f /root/hy/config.json
         cat <<EOF >/root/hy/config.json
 {"listen":":$UDP_PORT",
-"protocol":"udp",
+"protocol":"$PROTOCOL",
 "cert":"/root/hy/ca.crt",
 "key":"/root/hy/ca.key",
 "up":"100 Mbps",
