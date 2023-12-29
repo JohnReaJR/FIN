@@ -358,9 +358,5 @@ EOF
         echo "──────────────────────────────────────────────────────────•"
         echo "${T_RED} ⇢ Verification failed. Aborting installation.${T_RESET}"
         exit 1
-    fi
-}
-
-##--Installation--##
-check_dependencies
-install
+        ;;
+esac
