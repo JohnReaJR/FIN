@@ -62,9 +62,6 @@ info() {
 # verification function
 clear
 
-# Create the /etc/sleeve directory if it doesn't exist
-mkdir -p /etc/sleeve
-
 # Function to install the Hysteria server
 
 hy_install() {
@@ -124,7 +121,6 @@ hy_install() {
 
         # Create the /etc/sleeve directory if it doesn't exist
         mkdir -p /etc/sleeve
-        mkdir -p /root/hy
 
     # Default values
     DEFAULT_UDP_PORT="36712"
