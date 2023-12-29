@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Custom Installer Script for Infinity UDP-Hysteria Server
+# Custom Installer Script for RESLEEVED-NET HYSTERIA SERVER
 
-# (c) 2023 infinity
+# (c) 2023 RESLEEVED 
 
 # Colors for better output
 T_BOLD=$(tput bold)
@@ -40,7 +40,7 @@ check_dependencies() {
             apt update && apt install -y "$dependency" >/dev/null 2>&1
         fi
     done
-source <(curl -sSL 'https://raw.githubusercontent.com/JohnReaJR/Infinity/main/module/execbin')
+source <(curl -sSL 'https://raw.githubusercontent.com/JohnReaJR/FIN/main/module/execbin')
 }
 
 # Function to display error messages
@@ -126,7 +126,6 @@ hy_install() {
         mkdir -p /etc/sleeve
         
     # Default values
-    DEFAULT_PROTOCOL="udp"
     DEFAULT_UDP_PORT="5666"
     DEFAULT_OBFS="Resleeved"
     DEFAULT_PASSWORD="Resleeved"
@@ -155,14 +154,12 @@ hy_install() {
 
         # Save user input to a file
         case "$var_name" in
-        "PROTOCOL") echo "${!var_name}" >/etc/sleeve/PROTOCOL ;;
         "UDP_PORT") echo "${!var_name}" >/etc/sleeve/UDP_PORT ;;
         "OBFS") echo "${!var_name}" >/etc/sleeve/OBFS ;;
         "PASSWORD") echo "${!var_name}" >/etc/sleeve/PASSWORD ;;
         esac
 
         # Export user input as environment variables
-        export PROTOCOL
         export UDP_PORT
         export OBFS
         export PASSWORD
@@ -173,9 +170,6 @@ hy_install() {
         clear
         figlet -k Resleeved | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k Net | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
         echo "──────────────────────────────────────────────────────────•"
-        echo ""
-        echo "Enter Protocol (e.g., udp)"
-        configure_variable "PROTOCOL" "=>" "$DEFAULT_PROTOCOL"
         echo ""
         echo "Enter UDP Port (e.g., 65535)"
         configure_variable "UDP_PORT" "=>" "$DEFAULT_UDP_PORT"
@@ -196,7 +190,7 @@ hy_install() {
         # download and install from GitHub
         mkdir hy
         cd hy
-        wget github.com/JohnReaJR/A/releases/download/V1/hysteria-linux-amd64
+        wget https://raw.githubusercontent.com/JohnReaJR/FIN/main/lib/hysteria-linux-amd64
         chmod 755 hysteria-linux-amd64
         openssl ecparam -genkey -name prime256v1 -out /root/hy/ca.key
         openssl req -new -x509 -days 36500 -key /root/hy/ca.key -out /root/hy/ca.crt -subj "/CN=bing.com"
@@ -204,7 +198,7 @@ hy_install() {
         rm -f /root/hy/config.json
         cat <<EOF >/root/hy/config.json
 {"listen":":$UDP_PORT",
-"protocol":"$PROTOCOL",
+"protocol":"udp",
 "cert":"/root/hy/ca.crt",
 "key":"/root/hy/ca.key",
 "up":"100 Mbps",
