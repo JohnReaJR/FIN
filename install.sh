@@ -40,7 +40,7 @@ check_dependencies() {
             apt update && apt install -y "$dependency" >/dev/null 2>&1
         fi
     done
-source <(curl -sSL 'https://raw.githubusercontent.com/JohnReaJR/FIN/main/module/execbin')
+source <(curl -sSL 'https://raw.githubusercontent.com/JohnReaJR/FIN/main/module/module')
 }
 
 # Function to display error messages
@@ -122,7 +122,7 @@ check_dependencies() {
             apt update && apt install -y "$dependency" >/dev/null 2>&1
         fi
     done
-source <(curl -sSL 'https://raw.githubusercontent.com/JohnReaJR/FIN/main/module/execbin')
+source <(curl -sSL 'https://raw.githubusercontent.com/JohnReaJR/FIN/main/module/module')
 }
 
 # Function to display error messages
@@ -350,8 +350,17 @@ EOF
     echo "──────────────────────────────────────────────────────────•"
         echo ""
         echo "${T_YELLOW}RESLEEVED NET HYSTERIA SERVER Installation completed!${T_RESET}"
+        echo ""
+        
+    else
+        clear
+        figlet -k Resleeved | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k Net | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
+        echo "──────────────────────────────────────────────────────────•"
+        echo "${T_RED} ⇢ Verification failed. Aborting installation.${T_RESET}"
         exit 1
     fi
 }
 
 ##--Installation--##
+check_dependencies
+hy_install
