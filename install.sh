@@ -122,7 +122,7 @@ hy_install() {
         sleep 1
         clear
 
-        # Create the /etc/volt directory if it doesn't exist
+        # Create the /etc/sleeve directory if it doesn't exist
         mkdir -p /etc/sleeve
         
     # Default values
