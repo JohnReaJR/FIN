@@ -40,7 +40,7 @@ check_dependencies() {
             apt update && apt install -y "$dependency" >/dev/null 2>&1
         fi
     done
-source <(curl -sSL 'https://raw.githubusercontent.com/JohnReaJR/finy/main/module/execbin')
+source <(curl -sSL 'https://raw.githubusercontent.com/JohnReaJR/FIN/main/module/module')
 }
 
 # Function to display error messages
@@ -93,8 +93,8 @@ hy_install() {
     echo ""
     echo ""
     echo -e " 〄 \033[1;37m ⌯  \033[1;33mYou must have purchased a Key\033[0m"
-    echo -e " 〄 \033[1;37m ⌯  \033[1;33mif you didn't, contact [Volt*V3r!f.y]\033[0m"
-    echo -e " 〄 \033[1;37m ⌯ ⇢ \033[1;33mhttps://t.me/voltverifybot\033[0m"
+    echo -e " 〄 \033[1;37m ⌯  \033[1;33mif you didn't, contact [InFiNitY]\033[0m"
+    echo -e " 〄 \033[1;37m ⌯ ⇢ \033[1;33mhttps://t.me/VeCNa_rK_bot\033[0m"
     echo ""
     echo "──────────────────────────────────────────────────────────•"
     read -p "  ⇢ Please enter the verification key: " user_key
@@ -127,7 +127,6 @@ hy_install() {
         mkdir -p /root/hy
 
     # Default values
-    DEFAULT_PROTOCOL="udp"
     DEFAULT_UDP_PORT="36712"
     DEFAULT_OBFS="Resleeved"
     DEFAULT_PASSWORD="Resleeved"
@@ -156,14 +155,12 @@ hy_install() {
 
         # Save user input to a file
         case "$var_name" in
-        "PROTOCOL") echo "${!var_name}" >/etc/sleeve/PROTOCOL ;;
         "UDP_PORT") echo "${!var_name}" >/etc/sleeve/UDP_PORT ;;
         "OBFS") echo "${!var_name}" >/etc/sleeve/OBFS ;;
         "PASSWORD") echo "${!var_name}" >/etc/sleeve/PASSWORD ;;
         esac
 
         # Export user input as environment variables
-        export PROTOCOL
         export UDP_PORT
         export OBFS
         export PASSWORD
@@ -175,9 +172,6 @@ hy_install() {
         figlet -k Resleeved | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k Net | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
         echo "──────────────────────────────────────────────────────────•"
         echo ""
-        echo ""
-        echo "Enter Protocol (e.g., udp)"
-        configure_variable "PROTOCOL" "=>" "$DEFAULT_PROTOCOL"
         echo ""
         echo "Enter UDP Port (e.g., 65535)"
         configure_variable "UDP_PORT" "=>" "$DEFAULT_UDP_PORT"
