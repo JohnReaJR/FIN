@@ -356,5 +356,3 @@ EOF
 }
 
 ##--Installation--##
-check_dependencies
-hy_install
