@@ -350,13 +350,5 @@ EOF
     echo "──────────────────────────────────────────────────────────•"
         echo ""
         echo "${T_YELLOW}RESLEEVED NET HYSTERIA SERVER Installation completed!${T_RESET}"
-        echo ""
-
-    else
-        clear
-        figlet -k Resleeved | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1' && figlet -k Net | awk '{gsub(/./,"\033[3"int(rand()*5+1)"m&\033[0m")}1'
-        echo "──────────────────────────────────────────────────────────•"
-        echo "${T_RED} ⇢ Verification failed. Aborting installation.${T_RESET}"
-        exit 1
         ;;
 esac
