@@ -351,7 +351,7 @@ EOF
         echo ""
         echo "${T_YELLOW}RESLEEVED NET HYSTERIA SERVER Installation completed!${T_RESET}"
         exit 1
-    esac
+    fi
 }
 
 ##--Installation--##
