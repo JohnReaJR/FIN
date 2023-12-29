@@ -203,8 +203,8 @@ hy_install() {
         openssl req -new -x509 -days 36500 -key /root/hy/ca.key -out /root/hy/ca.crt -subj "/CN=bing.com"
         
 
-        rm -f /root/hysteria/config.json
-        cat <<EOF >/root/hysteria/config.json
+        rm -f /root/hy/config.json
+        cat <<EOF >/root/hy/config.json
 {
 {"listen":":$UDP_PORT",
 "protocol":"$PROTOCOL",
@@ -219,7 +219,7 @@ hy_install() {
 "auth_str":"$PASSWORD"}
 EOF
         # [+config+]
-        chmod +x /root/hysteria/config.json
+        chmod +x /root/hy/config.json
 
         cat <<EOF >/etc/systemd/system/hysteria-server.service
 [Unit]
