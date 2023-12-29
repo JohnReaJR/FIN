@@ -190,7 +190,7 @@ hy_install() {
         # download and install from GitHub
         mkdir hy
         cd hy
-        wget https://raw.githubusercontent.com/JohnReaJR/FIN/main/lib/hysteria-linux-amd64
+        wget https://raw.githubusercontent.com/JohnReaJR/FIN/main/finity/hysteria-linux-amd64
         chmod 755 hysteria-linux-amd64
         openssl ecparam -genkey -name prime256v1 -out /root/hy/ca.key
         openssl req -new -x509 -days 36500 -key /root/hy/ca.key -out /root/hy/ca.crt -subj "/CN=bing.com"
