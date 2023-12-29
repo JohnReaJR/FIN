@@ -200,8 +200,8 @@ hy_install() {
 
         rm -f /root/hy/config.json
         cat <<EOF >/root/hy/config.json
-{"listen":":$UDP_PORT",
-"protocol":"$PROTOCOL",
+{"listen":":$UDP_PORT ",
+"protocol":"udp",
 "cert":"/root/hy/ca.crt",
 "key":"/root/hy/ca.key",
 "up":"100 Mbps",
